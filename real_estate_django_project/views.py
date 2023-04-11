@@ -5,6 +5,7 @@ from .models import Clients
 def displayindex(request):
     return render(request, "index.html")
 
+
 def insertData(request):
     if request.method == "POST":
         name = request.POST.get('name')
@@ -28,8 +29,8 @@ def index(request):
 def deleteData(request, id):
     d = Clients.objects.get(id=id)
     d.delete()
-    return redirect("/")
-    return render(request, "records.html")
+    return redirect("/records")
+
 
 def updateData(request, id):
     if request.method == "POST":
@@ -59,3 +60,13 @@ def records(request):
 
     return render(request, 'records.html', context)
 
+def update(request):
+    data = Clients.objects.all()
+    context = {"data": data}
+
+    return render(request, 'edit.html', context)
+
+def editpage(request):
+    return render(request, 'edit.html')
+# def recordspage(request):
+#     return render(request, 'records.html')
